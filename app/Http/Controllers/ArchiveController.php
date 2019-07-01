@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Archive;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class ArchiveController extends Controller
 {
     /**
@@ -51,7 +51,7 @@ class ArchiveController extends Controller
         //file name to store
         $fileNameToStore = $filenames.'_'.time().'.'.$extension;
         //upload image
-        $path = $request->file('cover_page_front')->storeAs('cover_page_front/', $fileNameToStore);
+        $path = $request->file('cover_page_front')->storeAs('public/cover_page_front/', $fileNameToStore);
     }else{
         $fileNameToStore = 'noimage.jpg';
     }
@@ -66,18 +66,21 @@ class ArchiveController extends Controller
         //file name to store
         $fileNameToSave = $filename.'_'.time().'.'.$extension;
         //upload image
-        $path =  $request->file('cover_page_back')->storeAs('cover_page_back/', $fileNameToSave);
+        $path =  $request->file('cover_page_back')->storeAs('public/cover_page_back/', $fileNameToSave);
     }else{
         $fileNameToSave = 'noimage.jpg';
     }
 
-    $archive = new Archive();
-    $archive->title = $request->Input('title');
-    $archive->cover_page_front = $fileNameToStore;
-    $archive->cover_page_back = $fileNameToSave;
-     if($archive->save()){
-         return redirect(route('archives.create'))->with('success', "Archive has been created");
-     }
+        $archive = new Archive();
+        $archive->title = $request->Input('title');
+        $archive->cover_page_front = $fileNameToStore;
+        $archive->cover_page_back = $fileNameToSave;
+        $archive->subtitle = $request->input('subtitle');
+        $archive->description = $request->input('description');
+
+        if($archive->save()){
+            return redirect(route('archives.create'))->with('success', "Archive has been created");
+        }
     }
 
     /**
@@ -86,10 +89,23 @@ class ArchiveController extends Controller
      * @param  \App\Archive  $archive
      * @return \Illuminate\Http\Response
      */
-    public function show(Archive $archive)
+    public function show($id)
     {
-        $single = Archive::find($archive);
-        return view('archive/show');
+        $issues = Archive::with('archive_pub')->find($id);
+        //dd($issues);
+        return view('archive/show')->with('issues',$issues);
+    }
+    
+    public function current_issue(){
+        $issue = Archive::all()->last();
+        //dd($issue);
+        return view('pages/current')->with('issue',$issue);
+    }
+
+    public function prev_issue(){
+        $art=Archive::where("created_at",">", Carbon::now()->subMonths(6))->get();
+        //dd($art);
+        return view('pages/prev')->with('art',$art);
     }
 
     /**

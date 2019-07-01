@@ -224,8 +224,8 @@ img {
   border-left: 4px solid #3f000f; }
   .section-heading h5 {
     margin-bottom: 0;
-    text-transform: uppercase;
-    font-size: 20px;
+    text-transform: initial;
+    font-size: 15px;
     line-height: 1; }
     @media only screen and (max-width: 767px) {
       .section-heading h5 {
@@ -2200,7 +2200,40 @@ textarea.form-control {
     margin-bottom: 0; }
     @media only screen and (max-width: 767px) {
       .map-area iframe {
-        height: 250px; } }
+        height: 250px; } 
+    }
+
+
+#profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #512DA8;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  line-height: 45px;
+  padding-right: 30px;
+ 
+  align-content: center;
+  
+}
+aside{
+  display: inline-block;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+
+}
+.card{
+  position: absolute;
+  top: 6rem;
+  right: 23rem;
+  
+  z-index: 1;
+  align-content: center;
+}
 
 /* ====== The End ====== */
 

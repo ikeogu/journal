@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Payment;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +35,13 @@ class ArticleController extends Controller
         return view('Article/create');
     }
 
+    public function create2()
+    {
+        return view('Article/single_article');
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,13 +55,13 @@ class ArticleController extends Controller
         $this->validate(request(), [
             'title' => 'required','string',
             'author_name' => 'required','string',
-            'payment_proof' => 'required','string',
-            
+            'reference_code' => 'required','string',
+
             'email' => 'required','string',
             'agree'=>'required','boolean',
-            
+
         ]);
-       
+
         if($request->hasFile('filename')){
             //get file name with extension
             $fileNameWithExt = $request->file('filename')->getClientOriginalName();
@@ -58,50 +72,100 @@ class ArticleController extends Controller
             //file name to store
             $fileNameToStore = $filenames.'_'.time().'.'.$extension;
             //upload image
-            $path = $request->file('filename')->storeAs('public/papers/', $fileNameToStore);
+            $path = $request->file('filename')->storeAs('public/submited_articles/', $fileNameToStore);
         }else{
             $fileNameToStore = 'noimage.jpg';
         }
 
-        if($request->hasFile( 'payment_proof' )){
-            //get file name with extension
-            $fileNameWithExt = $request->file('payment_proof')->getClientOriginalName();
-            //get just file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
-            //get just extension
-            $extension =  $request->file('payment_proof')->getClientOriginalExtension();
-            //file name to store
-            $fileNameToSave = $filename.'_'.time().'.'.$extension;
-            //upload image
-            $path =  $request->file('payment_proof')->storeAs('public/Payment_Proof', $fileNameToSave);
-        }else{
-            $fileNameToSave = 'noimage.jpg';
-        }
+
         $paper = new Article();
         $paper->filename = $fileNameToStore;
-        $paper->payment_proof=$fileNameToSave;
+
+        // for refrence code
+
+
         $paper->title = $request->Input('title');
-        
+
         $paper->email = $request->Input('email');
         $paper->phone= $request->Input('phone');
         $paper->phone= $request->Input('city');
         $paper->keywords = $request->Input('keywords');
         $paper->category = $request->Input('category');
+        $paper->abstract = $request->Input('abstract');
+
         $paper->author_name = $request->Input('author_name');
         $paper->subject_area = $request->Input('subject_area');
         $paper->publication_edition = $request->Input('publication_edition');
-        
-        $paper->payment_mode = $request->Input('payment_mode');
-        $paper->amount = $request->Input('amount');
+
+
         $paper->know_us = $request->Input('know_us');
         $paper->agree = $request->Input('agree');
-        $archive = Archive::find($paper->publication_edition);
-        
-        
-        $paper->save();
-         
-           
-        return redirect(route('index'))->with('success', 'Paper Submitted Successfully.');
+        $paper->user_id = Auth()->user()->id;
+        $user = User::find($paper->user_id);
+
+        $user->articles()->save($paper);
+
+
+        return redirect(route('index'))->with('success', 'Paper Submitted Successfully. You\'ll be Contacted Soon.');
+    }
+
+    public function single_article(Request $request)
+    {
+
+        //dd($request->all());
+        $this->validate(request(), [
+            'title' => 'required','string',
+            'author_name' => 'required','string',
+            'reference_code' => 'required','string',
+
+            'email' => 'required','string',
+            'agree'=>'required','boolean',
+
+        ]);
+
+        if($request->hasFile('filename')){
+            //get file name with extension
+            $fileNameWithExt = $request->file('filename')->getClientOriginalName();
+            //get just file name
+            $filenames = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file('filename')->getClientOriginalExtension();
+            //file name to store
+            $fileNameToStore = $filenames.'_'.time().'.'.$extension;
+            //upload image
+            $path = $request->file('filename')->storeAs('public/articles/', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'nofile.pdf';
+        }
+
+
+        $paper = new Article();
+        $paper->filename = $fileNameToStore;
+
+        $paper->title = $request->Input('title');
+
+        $paper->email = $request->Input('email');
+        $paper->phone= $request->Input('phone');
+        $paper->phone= $request->Input('city');
+        $paper->keywords = $request->Input('keywords');
+        $paper->category = $request->Input('category');
+        $paper->abstract = $request->Input('abstract');
+
+        $paper->author_name = $request->Input('author_name');
+        $paper->subject_area = $request->Input('subject_area');
+
+
+
+        $paper->know_us = $request->Input('know_us');
+        $paper->agree = $request->Input('agree');
+        $paper->user_id = Auth()->user()->id;
+        $user = User::find($paper->user_id);
+
+
+        $user->articles()->save($paper);
+
+
+        return redirect(route('index'))->with('success', 'Article Submitted Successfully. You\'ll be Contacted Soon');
     }
 
     /**

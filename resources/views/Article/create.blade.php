@@ -13,6 +13,22 @@
             </div>
         </div>
     </section>
+    <div class="mag-breadcrumb py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('papers.create')}}">Call for Papers</a></li>
+
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div>
     <div class="mag-login-area py-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -175,33 +191,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Payment Mode') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="payment_mode" type="text" class="form-control @error('payment_mode') is-invalid @enderror" name="payment_mode" value="{{ old('payment_mode') }}" required autocomplete="payment_mode" autofocus>
 
-                                    @error('payment_mode')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Amount Paid') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="amount" type="text" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required autocomplete="amount" autofocus>
-
-                                    @error('amount')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('How do you KNow us?') }}</label>
 
@@ -229,25 +220,13 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="payment_proof" class="col-md-4 col-form-label text-md-right">{{ __('Upload payment Proof') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="payment_proof" type="file" class="form-control @error('payment_proof') is-invalid @enderror" name="payment_proof" value="{{ old('payment_proof') }}" required autocomplete="payment_proof" autofocus>
-
-                                    @error('payment_proof')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="form-group row ">
                                 <label class="col-md-4 col-form-label text-md-right"for="cagree">I Agree</label>
                                 <div class="col-md-2">
                                     <input type="checkbox" class="form-control input-group" value="1" name="agree">
-                                   
-                                    @error('payment_proof')
+
+                                    @error('reference_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -262,7 +241,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>

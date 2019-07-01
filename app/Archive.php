@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Archive extends Model
 {
    protected $fillable = [ 'cover_page_front',
-     'cover_page_back',
+     'cover_page_back','description', 'subtitle',
      
      'title',];
 

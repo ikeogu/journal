@@ -19,6 +19,8 @@ class CreateArchivesTable extends Migration
             $table->string('cover_page_back');
             $table->string('table_of_content');
             $table->string('title');
+            $table->string('subtitle');
+            $table->string('description');
             
             $table->timestamps();
         });

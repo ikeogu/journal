@@ -20,8 +20,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="/contact">Contact Us</li>
                         </ol>
                     </nav>
                 </div>
@@ -87,19 +87,33 @@
                         <div class="section-heading">
                             <h5>GET IN TOUCH</h5>
                         </div>
-
+                        @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div><br />
+                                @endif
+                                @if (\Session::has('success'))
+                                <div class="alert alert-success">
+                                    <p>{{ \Session::get('success') }}</p>
+                                </div><br />
+                        @endif
                         <!-- Contact Form Area -->
                         <div class="contact-form-area">
-                            <form action="#" method="post">
+                            <form action="{{route('contacts')}}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="name" placeholder="Name">
+                                            <input type="text" class="form-control" id="name" placeholder="Name" name="name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" id="email" placeholder="E-mail">
+                                            <input type="email" class="form-control" id="email" placeholder="E-mail" name="email">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -116,65 +130,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-                    <div class="sidebar-area bg-white mb-30 box-shadow">
-                        <!-- Sidebar Widget -->
-                        <div class="single-sidebar-widget p-30">
-                            <!-- Social Followers Info -->
-                            <div class="social-followers-info">
-                                <!-- Facebook -->
-                                <a href="#" class="facebook-fans"><i class="fa fa-facebook"></i> 4,360 <span>Fans</span></a>
-                                <!-- Twitter -->
-                                <a href="#" class="twitter-followers"><i class="fa fa-twitter"></i> 3,280 <span>Followers</span></a>
-                                <!-- YouTube -->
-                                <a href="#" class="youtube-subscribers"><i class="fa fa-youtube"></i> 1250 <span>Subscribers</span></a>
-                                <!-- Google -->
-                                <a href="#" class="google-followers"><i class="fa fa-google-plus"></i> 4,230 <span>Followers</span></a>
-                            </div>
-                        </div>
 
-                        <!-- Sidebar Widget -->
-                        <div class="single-sidebar-widget p-30">
-                            <!-- Section Title -->
-                            <div class="section-heading">
-                                <h5>Categories</h5>
-                            </div>
-
-                            <!-- Catagory Widget -->
-                            <ul class="catagory-widgets">
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Life Style</span> <span>35</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Travel</span> <span>30</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Foods</span> <span>13</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Game</span> <span>06</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sports</span> <span>28</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Football</span> <span>08</span></a></li>
-                                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> TV Show</span> <span>13</span></a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Sidebar Widget -->
-                        <div class="single-sidebar-widget">
-                            <a href="#" class="add-img"><img src="img/bg-img/add2.png" alt=""></a>
-                        </div>
-
-                        <!-- Sidebar Widget -->
-                        <div class="single-sidebar-widget p-30">
-                            <!-- Section Title -->
-                            <div class="section-heading">
-                                <h5>Newsletter</h5>
-                            </div>
-
-                            <div class="newsletter-form">
-                                <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
-                                <form action="#" method="get">
-                                    <input type="search" name="widget-search" placeholder="Enter your email">
-                                    <button type="submit" class="btn mag-btn w-100">Subscribe</button>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

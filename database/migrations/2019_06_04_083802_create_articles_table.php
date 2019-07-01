@@ -15,7 +15,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->integer('user_id');
             $table->string('title');
             $table->string('author_name');
             $table->string('subject_area')->nullable();
@@ -31,8 +31,9 @@ class CreateArticlesTable extends Migration
             $table->string('amount');
             $table->string('know_us');
             $table->string('filename');
-            $table->string('payment_proof');
+            $table->string('reference_code');
             $table->boolean('agree');
+            $table->timestamps();
         });
     }
 

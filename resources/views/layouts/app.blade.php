@@ -10,14 +10,14 @@
     <title>{{ config('app.name', 'BRJ') }}</title>
 
     <!-- Scripts -->
-   
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('css/style.css')}} ">
-   
+
 </head>
 <body>
          <!-- Preloader -->
@@ -38,7 +38,7 @@
                 <nav class="classy-navbar justify-content-between " id="magNav">
 
                     <!-- Nav brand -->
-                    
+
                     <h3> Bio Research Journal</h3>
 
                     <!-- Navbar Toggler -->
@@ -59,147 +59,90 @@
                             <div class="classynav">
                                 <ul>
                                     <li class="active"><a href="/">Home</a></li>
-                                    <li><a href="archives/create">Archive</a></li>
-                                                                        
+                                    <li ><a href="{{route('publish.index')}}">Articles</a></li>
+
+                                    <li><a href="{{route('archives.index')}}">Archive</a></li>
+
                                     <li><a href="/about">About</a></li>
                                     <li><a href="/contact">Contact</a></li>
-                                    @if (Route::has('login'))
-                               
-                                        @auth
-                                            <a href="#"></a>
-                                        @else
+
+
+
+
+                                        @guest
                                             <a  href="{{ route('login') }}">Login</a>  |
 
                                             @if (Route::has('register'))
                                                 <a  href="{{ route('register') }}">Register</a>
                                             @endif
-                                        @endauth
-                           
-                                    @endif
+                                        @else
+                                        @if(Auth::user()->role_id==1)
+                                                <li>
+                                                    <a href="#" id="showProfile">
+                                                         <figure id="profileImage" class="col-2"></figure>
+                                                    </a>
+                                                </li> |
+                                                <li><a href="{{route('logout')}}">Log Out</a></li>
+                                        @elseif(Auth::user()->role_id==2)
+                                                <li>
+                                                    <a href="#" id="showProfile">
+                                                        <figure id="profileImage" class="col-2"></figure>
+                                                    </a>
+                                                </li> |
+                                                <li><a href="{{route('logout')}}">Log Out</a></li>
+                                        @else
+                                                <li><a href="#" id="showProfile">
+                                                    <figure id="profileImage" class="col-2"></figure>
+                                                    </a>
+                                                </li>
+                                                |
+                                                <li><a href="{{route('logout')}}">Log Out</a></li>
+                                        @endif
+                                        @endguest
 
                                 </ul>
+                                @guest
+                                @else
+                                    <div class="card" id="profile">
+                                        <div class="card-header row">
+                                            <div id="profileImage"></div>
+                                            <div class="name col-8">
+                                                    <span id="firstName">{{Auth::user()->name}}</span>
+                                                    <small>{{Auth::user()->email}}</small>
+                                            </div>
+
+                                        </div>
+                                        <hr>
+                                        <div class="card-body">
+                                                @if(Auth::user()->role_id==1)
+                                                    <div>
+                                                        <a href="{{route('dash')}}">Admin Dasboard</a>
+                                                    </div>
+                                                @elseif(Auth::user()->role_id==2)
+                                                <div>
+                                                       <a href="#"> Editor Dasboard</a>
+                                                </div>
+                                                @endif
+
+                                        </div>
+                                    </div>
+                                @endguest
                             </div>
                             <!-- Nav End -->
                         </div>
 
-                        <div class="top-meta-data d-flex align-items-center">
-                            <!-- Top Search Area -->
-                            <div class="top-search-area">
-                                <form action="#" method="post">
-                                    <input type="search" name="top-search" id="topSearch" placeholder="Search and hit enter...">
-                                    <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                           
-                        </div>
+
                     </div>
                 </nav>
             </div>
         </div>
     </header>
+
         <main class="py-4">
             @yield('content')
         </main>
         <footer class="footer-area">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Widget Area -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget">
-                            <!-- Logo -->
-                            <a href="index.html" class="foo-logo"><img src="img/core-img/logo2.png" alt=""></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="footer-social-info">
-                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Footer Widget Area -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget">
-                            <h6 class="widget-title">Categories</h6>
-                            <nav class="footer-widget-nav">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Life Style</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tech</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Travel</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Music</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Foods</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Fashion</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Game</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Football</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sports</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> TV Show</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <!-- Footer Widget Area -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget">
-                            <h6 class="widget-title">Sport Videos</h6>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post style-2 d-flex">
-                                <div class="post-thumbnail">
-                                    <img src="img/bg-img/12.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">Take A Romantic Break In A Boutique Hotel</a>
-                                    <div class="post-meta d-flex justify-content-between">
-                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
-                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
-                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post -->
-                            <div class="single-blog-post style-2 d-flex">
-                                <div class="post-thumbnail">
-                                    <img src="img/bg-img/13.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">Travel Prudently Luggage And Carry On</a>
-                                    <div class="post-meta d-flex justify-content-between">
-                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
-                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
-                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footer Widget Area -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget">
-                            <h6 class="widget-title">Channels</h6>
-                            <ul class="footer-tags">
-                                <li><a href="#">Travel</a></li>
-                                <li><a href="#">Fashionista</a></li>
-                                <li><a href="#">Music</a></li>
-                                <li><a href="#">DESIGN</a></li>
-                                <li><a href="#">NEWS</a></li>
-                                <li><a href="#">TRENDING</a></li>
-                                <li><a href="#">VIDEO</a></li>
-                                <li><a href="#">Game</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Foods</a></li>
-                                <li><a href="#">TV Show</a></li>
-                                <li><a href="#">Twitter Video</a></li>
-                                <li><a href="#">Playing</a></li>
-                                <li><a href="#">clips</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Copywrite Area -->
              <div class="copywrite-area">
@@ -225,17 +168,34 @@
                 </div>
             </div>
         </footer>
-    
-    
+
+
     <!-- Popper js -->
     <script src="{{asset('js/bootstrap/popper.min.js')}}"></script>
     <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Bootstrap js -->
     <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
     <!-- All Plugins js -->
-    
+
     <!-- Active js -->
     <script src="{{asset('js/active.js')}}"></script>
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).click(function() {
+            $("#showProfile").click(function() {
+                $("#profile").toggle();
+            });
+        });
+
+        $(document).ready(function(){
+            var firstName = $('#firstName').text();
+
+            var intials = $('#firstName').text().charAt(0) + $('#firstName').text().charAt(1);
+            var profileImage = $('#profileImage').text(intials);
+        });
+
+     </script>
+
 </body>
 </html>

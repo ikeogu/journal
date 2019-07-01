@@ -1,0 +1,118 @@
+
+@extends('layouts.app')
+@section('content')
+<section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/49.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Bio Research Journal</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="mag-breadcrumb py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a> > Search result</li>
+
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+<div>
+
+
+    <section class="mag-posts-area d-flex flex-wrap">
+
+			<div class="post-sidebar-area left-sidebar ">
+				<!-- Sidebar Widget -->
+
+			</div>
+
+			<!-- >>>>>>>>>>>>>>>>>>>>
+						Main Posts Area
+			<<<<<<<<<<<<<<<<<<<<< -->
+            <div class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
+
+                    <!-- Trending Now Posts Area -->
+                    <div class="trending-now-posts mb-30">
+                            <!-- Section Title -->
+                            <div class="section-heading">
+                                    <h5>Bio Research Journal</h5>
+                            </div>
+                    </div>
+                    @if ($errors->any())
+                            <div class="alert alert-danger">
+                                    <ul>
+                                            @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                            @endforeach
+                                    </ul>
+                            </div><br />
+                            @endif
+                            @if (\Session::has('success'))
+                            <div class="alert alert-success">
+                                    <p>{{ \Session::get('success') }}</p>
+                            </div><br />
+                        @endif
+                    <!-- Feature Video Posts Area -->
+                    <div class="feature-video-posts mb-30">
+                        <!-- Section Title -->
+
+                        <div class="featured-video-posts">
+                            <div class="row">
+                                <div class="col-12 ">
+
+                                    <!-- Post Contetnt -->
+                                    <div class="post-content">
+
+                                        @if(isset($details))
+                                            <p> The Search results for  <b> {{ $query }} </b> are :</p>
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Author Name</th>
+                                                        <th>KeyWords</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($details as $user)
+                                                    <tr>
+                                                        <td>{{$user->title}}</td>
+                                                        <td>{{$user->author_name}}</td>
+                                                        <td>{{$user->keywords}}</td>
+                                                        <td><a href="/publish/{{$user->id}}">View more</a></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                        
+
+                                        <h5>No Details found. Try to search again !</h5>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+			@include('searchbar')
+    </section>
+
+
+
+
+@endsection

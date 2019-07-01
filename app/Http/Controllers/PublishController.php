@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Publish;
 use App\Archive;
+use Illuminate\Http\File;
+use PDF;
 use Illuminate\Http\Request;
 
 class PublishController extends Controller
@@ -27,6 +29,7 @@ class PublishController extends Controller
     public function create()
     {
         $archive = Archive::all();
+
         return view('Publish/create',['archive'=>$archive]);
     }
 
@@ -57,12 +60,13 @@ class PublishController extends Controller
         //file name to store
         $fileNameToSave = $filename.'_'.time().'.'.$extension;
         //upload image
-        $path =  $request->file('filename')->storeAs('Published/', $fileNameToSave);
+        $path =  $request->file('filename')->storeAs('public/published/', $fileNameToSave);
     }else{
-        $fileNameToStore= 'nofile.mime';
+        $fileNameToSave= 'nofile.mime';
     }
 
     $publish = new Publish();
+    
     $publish->title = $request->Input('title');
     $publish->abstract = $request->Input('abstract');
     $publish->author_name =  $request->Input('author_name');
@@ -70,26 +74,29 @@ class PublishController extends Controller
     $publish->keywords =  $request->Input('keywords');
     $publish->no_pages =  $request->Input('no_pages');
     $publish->archive_id=  $request->Input('archive_id');
+       
     $archive = Archive::find($publish->archive_id); 
-    //dd($archive);   
+         
     $publish->filename = $fileNameToSave;
 
-     if($archive->archive_pub()->saveMany([$publish])){
+    if($archive->archive_pub()->save($publish)){
 
         return redirect(route('publish.create'))->with('success', "Article has been Published");
-     }
     }
 
+       
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Publish  $publish
      * @return \Illuminate\Http\Response
      */
-    public function show(Publish $publish)
+    public function show($id)
     {
-        $single = Archive::find($publish);
-        return view('Publiah/show',['publish'=>$single]);
+        $publish = Publish::find($id);
+        //dd($publish );
+        return view('Publish/show')->with('publish',$publish);
     }
 
     /**
@@ -124,5 +131,21 @@ class PublishController extends Controller
     public function destroy(Publish $publish)
     {
         //
+    }
+
+    public function downloadPDF($id){
+        $article= Publish::find($id);
+        //dd($article);
+        $file_path = public_path('storage/published/'.$article->filename);
+        return response()->download($file_path);
+          
+         
+    }
+    public function readBook($id)
+    {
+        $file = Publish::findOrFail($id);
+        $file_path = public_path('storage/published/'.$file->filename);
+        return response()->file($file_path);
+          
     }
 }
