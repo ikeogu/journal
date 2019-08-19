@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Editor;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
 class EditorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('editors');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -65,6 +71,9 @@ class EditorController extends Controller
 
 
        $editor = new Editor();
+       $editor->user_editor_id = auth()->user()->id;
+       $user = User::find($editor->user_edtor_id);
+       $editor->user_editor()->associate($user);
        $editor->salutation = $request->Input('salutation');
        $editor->fullname  = $request->Input('fullname');
        $editor->gender  =  $request->Input('gender');

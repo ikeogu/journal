@@ -27,7 +27,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+
     public function role(){
         return $this->hasOne(Role::class);
     }
@@ -39,5 +39,14 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function corr_article()
+    {
+        return $this->hasMany(CorrArticle::class);
+    }
+
+    public function editor(){
+        return $this->hasOne(Editor::class);
     }
 }

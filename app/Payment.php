@@ -10,13 +10,13 @@ class Payment extends Model
         'reference','amount','user_id','gateway_response','customer_code','bank','paid_at','status',
     ];
 
- 
+
     public function userpay(){
      return $this->belongsTo(User::class);
     }
 
     public function article_pay(){
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(CorrArticle::class);
     }
-    
+
 }

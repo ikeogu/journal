@@ -1,7 +1,8 @@
 <html>
 <head></head>
 <body style="background: black; color: white">
-<h1>{{$title}}</h1>
-<p>{{$content}}</p>
+<h1>{{$subject}}</h1>
+
+<p>{{}}</p>
 </body>
 </html>

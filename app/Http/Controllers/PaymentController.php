@@ -57,18 +57,16 @@ class PaymentController extends Controller
         $user = User::find($paid->user_id);
         $paid->order_id = data_get($paymentDetails, 'data.metadata.order_id');
 
-        if($paid->order_id == 1){
+        if($paid->order_id == 2){
             if($user->payments()->save($paid)){
             // dd($paid);
-                return view('Article/single_article',['paid'=>$paid])->with('success', 'Transfer Successful');
+                return view('corr_art.create',['paid'=>$paid])->with('success', 'Transfer Successful');
             }
-        }elseif ($paid->order_id == 2) {
-            # code...
+        }else{
             if($user->payments()->save($paid)){
                 // dd($paid);
-
-                    return redirect(route('papers.create', ['paid'=>$paid]))->with('success', 'Transfer Successful');
-            }
+                    return view('CorrArticle/single',['paid'=>$paid])->with('success', 'Transfer Successful');
+                }
         }
 
     }

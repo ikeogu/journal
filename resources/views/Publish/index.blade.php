@@ -44,8 +44,8 @@
 
 
                                     <li class="list-group-item">
-                                        <h5> Title : </h5><a href="/publish/{{$pap->id}}">{{$pap->title}}</a></li>
-                                    <li class="list-group-item"> <h5> Author : </h5><a href="/publish/{{$pap->id}}">{{$pap->author_name}}</a></li>
+                                        <h5> Title : <a href="/publish/{{$pap->id}}" style="color:blue;"> {{$pap->title}}</a> </h5></li>
+                                    <li class="list-group-item"> <h5> Author : <a href="/publish/{{$pap->id}}"> {{$pap->author_name}}</a> </h5></li>
 
                                 </ul>
                             </div>
@@ -55,14 +55,7 @@
                 </div>
 
         <!-- Pagination -->
-        <nav>
-            <ul class="pagination">
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-            </ul>
-        </nav>
+        {{$publish->links()}}
 
     </div>
 </div>

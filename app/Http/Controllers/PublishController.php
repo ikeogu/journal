@@ -17,7 +17,7 @@ class PublishController extends Controller
      */
     public function index()
     {
-        $publish = Publish::all();
+        $publish = Publish::paginate(9);
         return view('Publish/index',['publish'=>$publish]);
     }
 
@@ -47,8 +47,8 @@ class PublishController extends Controller
             'authors_email'=>'required|string:max:100',
             'author_name'=>'required|string:max:1000',
             'no_pages'=>'required|string:max:8',
-            
-            
+
+
         ]);
     if($request->hasFile('filename')){
         //get file name with extension
@@ -66,7 +66,7 @@ class PublishController extends Controller
     }
 
     $publish = new Publish();
-    
+
     $publish->title = $request->Input('title');
     $publish->abstract = $request->Input('abstract');
     $publish->author_name =  $request->Input('author_name');
@@ -74,9 +74,9 @@ class PublishController extends Controller
     $publish->keywords =  $request->Input('keywords');
     $publish->no_pages =  $request->Input('no_pages');
     $publish->archive_id=  $request->Input('archive_id');
-       
-    $archive = Archive::find($publish->archive_id); 
-         
+
+    $archive = Archive::find($publish->archive_id);
+
     $publish->filename = $fileNameToSave;
 
     if($archive->archive_pub()->save($publish)){
@@ -84,7 +84,7 @@ class PublishController extends Controller
         return redirect(route('publish.create'))->with('success', "Article has been Published");
     }
 
-       
+
     }
     /**
      * Display the specified resource.
@@ -138,14 +138,14 @@ class PublishController extends Controller
         //dd($article);
         $file_path = public_path('storage/published/'.$article->filename);
         return response()->download($file_path);
-          
-         
+
+
     }
     public function readBook($id)
     {
         $file = Publish::findOrFail($id);
         $file_path = public_path('storage/published/'.$file->filename);
         return response()->file($file_path);
-          
+
     }
 }

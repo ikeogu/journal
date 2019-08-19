@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticlesTable extends Migration
+class CreateCorrArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('corr_articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('title');
@@ -24,11 +24,13 @@ class CreateArticlesTable extends Migration
             $table->string('keywords');
             $table->integer('publication_edition')->nullable();
             $table->string('email');
-
-            $table->string('phone');
             
-            $table->string('know_us');
+            $table->string('phone');
+            $table->string('payment_mode');
+            $table->string('amount');
+
             $table->string('filename');
+            $table->string('customer_code');
 
             $table->timestamps();
         });
@@ -41,6 +43,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('corr_articles');
     }
 }

@@ -14,11 +14,12 @@ class EmailController extends Controller
 
 
     public function send(Request $request){
+
         $this->validate($request,[
             'email' => 'required|email',
             'subject' => 'min:3',
             'body' => 'string',
-            'name' => 'required'
+
         ]);
 
         $data = [
@@ -26,17 +27,18 @@ class EmailController extends Controller
             'subject' => $request->subject,
 
             'bodyMessage' => $request->body,
-            'name' => $request->name
-        ];
-        $emailAddress =[
             'email' => $request->email
         ];
 
-        Mail::send('Mail.send', $data, function($message) use ($data){
+        $send = Mail::send('Mail.send', $data, function($message) use ($data){
+
             $message->from(auth()->user()->email, auth()->user()->name);
-            $message->to($emailAddress['email']);
+            $message->to($data['email']);
             $message->subject($data['subject']);
         });
+        If($send){
+            return redirect(route('compose'))->with('success', 'Email Sent');
+        }
 
         Notification::route('mail', $request->email)
             ->notify(new MailSent());

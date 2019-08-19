@@ -151,7 +151,7 @@
                   </span>
                 </a>
               </li>
-              <li><a href="3">Compose</a></li>
+            <li><a href="{{route('compose')}}">Compose</a></li>
 
             </ul>
           </li>

@@ -30,112 +30,111 @@
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
+            <div class="mag-main-menu" id="sticker" >
+                    <div class="classy-nav-container ">
+                        <!-- Menu -->
+                        <nav class="classy-navbar justify-content-between " id="magNav">
 
-        <!-- Navbar Area -->
-        <div class="mag-main-menu" id="sticker">
-            <div class="classy-nav-container breakpoint-off  bg-transparent">
-                <!-- Menu -->
-                <nav class="classy-navbar justify-content-between " id="magNav">
+                            <!-- Nav brand -->
 
-                    <!-- Nav brand -->
+                            <h3 class="nav-brand"> BRJ</h3>
 
-                    <h3> Bio Research Journal</h3>
-
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Nav Content -->
-                    <div class="nav-content d-flex align-items-center">
-                        <div class="classy-menu">
-
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
                             </div>
 
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li class="active"><a href="/">Home</a></li>
-                                    <li ><a href="{{route('publish.index')}}">Articles</a></li>
+                            <!-- Nav Content -->
+                            <div class="nav-content d-flex align-items-center">
+                                <div class="classy-menu">
 
-                                    <li><a href="{{route('archives.index')}}">Archive</a></li>
-
-                                    <li><a href="/about">About</a></li>
-                                    <li><a href="/contact">Contact</a></li>
-
-
-
-
-                                        @guest
-                                            <a  href="{{ route('login') }}">Login</a>  |
-
-                                            @if (Route::has('register'))
-                                                <a  href="{{ route('register') }}">Register</a>
-                                            @endif
-                                        @else
-                                        @if(Auth::user()->role_id==1)
-                                                <li>
-                                                    <a href="#" id="showProfile">
-                                                         <figure id="profileImage" class="col-2"></figure>
-                                                    </a>
-                                                </li> |
-                                                <li><a href="{{route('logout')}}">Log Out</a></li>
-                                        @elseif(Auth::user()->role_id==2)
-                                                <li>
-                                                    <a href="#" id="showProfile">
-                                                        <figure id="profileImage" class="col-2"></figure>
-                                                    </a>
-                                                </li> |
-                                                <li><a href="{{route('logout')}}">Log Out</a></li>
-                                        @else
-                                                <li><a href="#" id="showProfile">
-                                                    <figure id="profileImage" class="col-2"></figure>
-                                                    </a>
-                                                </li>
-                                                |
-                                                <li><a href="{{route('logout')}}">Log Out</a></li>
-                                        @endif
-                                        @endguest
-
-                                </ul>
-                                @guest
-                                @else
-                                    <div class="card" id="profile">
-                                        <div class="card-header row">
-                                            <div id="profileImage"></div>
-                                            <div class="name col-8">
-                                                    <span id="firstName">{{Auth::user()->name}}</span>
-                                                    <small>{{Auth::user()->email}}</small>
-                                            </div>
-
-                                        </div>
-                                        <hr>
-                                        <div class="card-body">
-                                                @if(Auth::user()->role_id==1)
-                                                    <div>
-                                                        <a href="{{route('dash')}}">Admin Dasboard</a>
-                                                    </div>
-                                                @elseif(Auth::user()->role_id==2)
-                                                <div>
-                                                       <a href="#"> Editor Dasboard</a>
-                                                </div>
-                                                @endif
-
-                                        </div>
+                                    <!-- Close Button -->
+                                    <div class="classycloseIcon">
+                                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                                     </div>
-                                @endguest
+
+                                    <!-- Nav Start -->
+                                    <div class="classynav">
+                                        <ul>
+                                            <li class="active"><a href="/">Home</a></li>
+                                            <li ><a href="{{route('publish.index')}}">Articles</a></li>
+
+                                            <li><a href="{{route('archives.index')}}">Archive</a></li>
+
+                                            <li><a href="/about">About</a></li>
+                                            <li><a href="/contact">Contact</a></li>
+
+
+
+
+                                                @guest
+                                                    <a  href="{{ route('login') }}">Login</a>  |
+
+                                                    @if (Route::has('register'))
+                                                        <a  href="{{ route('register') }}">Register</a>
+                                                    @endif
+                                                @else
+                                                @if(Auth::user()->role_id==1)
+                                                        <li>
+                                                            <a href="#" id="showProfile">
+                                                                 <figure id="profileImage" class="col-2"></figure>
+                                                            </a>
+                                                        </li> |
+                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
+                                                @elseif(Auth::user()->role_id==2)
+                                                        <li>
+                                                            <a href="#" id="showProfile">
+                                                                <figure id="profileImage" class="col-2"></figure>
+                                                            </a>
+                                                        </li> |
+                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
+                                                @else
+                                                        <li><a href="#" id="showProfile">
+                                                            <figure id="profileImage" class="col-2"></figure>
+                                                            </a>
+                                                        </li>
+                                                        |
+                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
+                                                @endif
+                                                @endguest
+
+                                        </ul>
+                                        @guest
+                                        @else
+                                            <div class="card" id="profile">
+                                                <div class="card-header row" id="showProfile">
+                                                    <figure id="profileImage"></figure>
+                                                    <div class="name col-8">
+                                                            <span id="firstName">{{Auth::user()->name}}</span>
+                                                            <small>{{Auth::user()->email}}</small>
+                                                    </div>
+
+                                                </div>
+                                                <hr>
+                                                <div class="card-body">
+                                                        @if(Auth::user()->role_id==1)
+                                                            <div>
+                                                                <a href="{{route('dash')}}">Admin Dasboard</a>
+                                                            </div>
+                                                        @elseif(Auth::user()->role_id==2)
+                                                        <div>
+                                                               <a href="#"> Editor Dasboard</a>
+                                                        </div>
+                                                        @endif
+
+                                                </div>
+                                            </div>
+                                        @endguest
+                                    </div>
+                                    <!-- Nav End -->
+                                </div>
+
+
                             </div>
-                            <!-- Nav End -->
-                        </div>
-
-
+                        </nav>
                     </div>
-                </nav>
-            </div>
-        </div>
+                </div>
+
     </header>
 
         <main class="py-4">

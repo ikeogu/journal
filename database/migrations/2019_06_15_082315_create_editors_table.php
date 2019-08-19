@@ -6,17 +6,18 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEditorsTable extends Migration
 {
-    /**               
-                
-            
+    /**
+
+
      * Run the migrations.
      *
-     * @return void 
+     * @return void
      */
     public function up()
     {
         Schema::create('editors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_editor_id');
             $table->string('salutation');
             $table->string('fullname');
             $table->string('gender');
@@ -30,7 +31,7 @@ class CreateEditorsTable extends Migration
             $table->string('books_authored');
             $table->string('resume');
             $table->string('status')->default(0);
-            
+
             $table->timestamps();
         });
     }

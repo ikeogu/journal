@@ -30,9 +30,9 @@
     <div>
     <section class="mag-posts-area d-flex flex-wrap">
 
-			<div class="">
+			<aside class="">
 				<!-- Sidebar Widget -->
-				<div class="mt-30 mb-30 bg-white ">
+				<div class="mt-30 mb-30 bg-white col-sm-12">
 					<div class="single-sidebar-widget p-30">
 							<!-- Section Title -->
 
@@ -52,22 +52,28 @@
 							<a href="{{route('current')}}"> <h5>Current Issue</h5></a>
 						</div>
 						<div class="section-heading">
-						<a href="{{route('sing')}}"> <h5>Submit your Article</h5></a>
-						</div>
+						    <a href="{{route('sing')}}"> <h5>Submit  Article</h5></a>
+                        </div>
+                        @auth
+                            <div class="section-heading">
+                                <a href="{{route('makepay')}}"> <h5>Submit Corrected Article</h5></a>
+                            </div>
+                        @endauth
 						<div class="section-heading">
-							<h5>View Articles</h5>
-						</div>
+							<h5> <a href="{{route('publish.index')}}">View Articles</a></h5>
+                        </div>
+                        @auth
 						<div class="section-heading">
-										<a href="{{route('editors.create')}}"> <h5>Apply for Editor</h5></a>
+							<a href="{{route('editors.create')}}"> <h5>Apply for Editor</h5></a>
 						</div>
-
+                        @endauth
 						<div class="section-heading">
 										<h5>Our Template</h5>
 						</div>
 					</div>
 				</div>
 
-            <!-- Sidebar Widget -->
+                <!-- Sidebar Widget -->
 				<div class="mt-30 mb-30 bg-white ">
 						<div class="single-sidebar-widget">
 
@@ -94,12 +100,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</aside>
 
 			<!-- >>>>>>>>>>>>>>>>>>>>
 						Main Posts Area
 			<<<<<<<<<<<<<<<<<<<<< -->
-			<div class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
+			<section class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
 				<!-- Trending Now Posts Area -->
 				<div class="trending-now-posts mb-30">
 						<!-- Section Title -->
@@ -216,7 +222,7 @@
 
 				Bio Research Journal  (BRJ) may make changes to the features, functionality or content of our Website or Services at any time. Any research content provided by our Authors are of the Author’s opinion, and is not intended to malign any religion, ethic group, club, organization, company, individual or anyone or anything.  Bio Research Journal  (BRJ) reserve the right in our sole discretion to edit or remove any documents, information or other content appearing on our Website or Services. Any errors discovered are the fault of the authors. In no event shall  Bio Research Journal  (BRJ) be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such site or resource.
 			</p>
-			</div>
+        </section>
 			@include('searchbar')
     </section>
 

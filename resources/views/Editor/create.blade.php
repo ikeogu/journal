@@ -59,7 +59,7 @@
                                 <label for="salutation" class="col-md-4 col-form-label text-md-right">{{ __('Salutation') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="salutation" type="text" class="form-control @error('salutation') is-invalid @enderror" name="salutation" value="{{ old('salutation') }}" required autocomplete="salutation" autofocus>
+                                    <input id="salutation" type="text" class="form-control @error('salutation') is-invalid @enderror" name="salutation" value="{{ old('salutation') }}" required autocomplete="salutation" autofocus placeholder="Sir/ Madam/ Mr/Mrs/ Master/Miss">
 
                                     @error('salutation')
                                         <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __(' Full Name ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input  type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" value="{{ old('fullname') }}" required autocomplete="fullname">
+                                    <input  type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" value="{{ auth()->user()->name }}" required autocomplete="fullname">
 
                                     @error('fullname')
                                         <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ auth()->user()->email}}" required autocomplete="email">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="position" type="text" class="form-control @error('position') is-invalid @enderror" name="position" value="{{ old('position') }}" required>
+                                    <input id="position" type="text" class="form-control @error('position') is-invalid @enderror" name="position" value="Editor" readonly>
 
                                     @error('position')
                                         <span class="invalid-feedback" role="alert">
@@ -151,7 +151,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Current Organization') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="current_org" type="text" class="form-control @error('current_org') is-invalid @enderror" name="current_org" value="{{ old('current_org') }}" required a>
+                                    <input id="current_org" type="text" class="form-control @error('current_org') is-invalid @enderror" name="current_org" value="{{ old('current_org') }}" required placeholder="E.g Lecture in University of Port Harcourt">
 
                                     @error('current_org')
                                         <span class="invalid-feedback" role="alert">

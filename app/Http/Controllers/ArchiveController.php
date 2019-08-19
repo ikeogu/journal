@@ -14,10 +14,10 @@ class ArchiveController extends Controller
      */
     public function index()
     {
-        $issues = Archive::all();
+        $issues = Archive::paginate(9);
         return view('archive/index',['issues'=>$issues]);
     }
-  
+
 
     /**
      * Show the form for creating a new resource.
@@ -95,7 +95,7 @@ class ArchiveController extends Controller
         //dd($issues);
         return view('archive/show')->with('issues',$issues);
     }
-    
+
     public function current_issue(){
         $issue = Archive::all()->last();
         //dd($issue);

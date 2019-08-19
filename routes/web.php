@@ -36,7 +36,7 @@ Route::get('/readers', function () {
 });
 Route::get('/compose', function () {
     return view('Mail/compose');
-});
+})->name('compose');
 Route::get('/inbox', function () {
     return view('Mail/inbox');
 });
@@ -51,13 +51,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/papers','ArticleController');
 Route::post('/papers','ArticleController@store')->name('pap');
-Route::post('/single-papers','ArticleController@single_article')->name('single');
-
+Route::post('/single-paper','CorrArticleController@single_article')->name('single');
+Route::get('/single_art','CorrArticleController@single')->name('sin');
 Route::resource('archives', 'ArchiveController');
 Route::resource('publish', 'PublishController');
 Route::resource('editors','EditorController');
 Route::resource('category','CategoryController');
 Route::resource('fee','FeeController');
+Route::resource('corr_art', 'CorrArticleController');
 Route::get('/current_issue','ArchiveController@current_issue')->name('current');
 Route::get('/prev_issue','ArchiveController@prev_issue')->name('prev');
 
@@ -113,5 +114,8 @@ Route::any('/search',function(){
 //contact us
 Route::get('/contact-us', 'ContactUSController@contactUS');
 Route::post('/contact_us', 'ContactUSController@contactUSPost')->name('contacts');
+
+// send mail
+Route::post('/sendmail', 'EmailController@send')->name('mailme');
 
 
