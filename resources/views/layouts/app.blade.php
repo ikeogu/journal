@@ -1,200 +1,259 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>{{ config('app.name', 'BRJ') }}</title>
+    <!-- Title -->
+    <title>Bio Research Journal</title>
 
-    <!-- Scripts -->
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
 
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{asset('css/style.css')}} ">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 </head>
+
 <body>
-         <!-- Preloader -->
+    <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="spinner">
-            <div class="double-bounce1"> <h4>Loading....</h4></div>
-            <div class="double-bounce2"> <h4>Loading....</h4></div>
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
         </div>
     </div>
-
-    <!-- ##### Header Area Start ##### -->
     <header class="header-area">
-            <div class="mag-main-menu" id="sticker" >
-                    <div class="classy-nav-container ">
-                        <!-- Menu -->
-                        <nav class="classy-navbar justify-content-between " id="magNav">
 
-                            <!-- Nav brand -->
+        <!-- Navbar Area -->
+        <div class="mag-main-menu" id="sticker">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="magNav">
 
-                            <h3 class="nav-brand"> BRJ</h3>
+                    <!-- Nav brand -->
+                    <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
 
-                            <!-- Navbar Toggler -->
-                            <div class="classy-navbar-toggler">
-                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Nav Content -->
+                    <div class="nav-content d-flex align-items-center">
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
 
-                            <!-- Nav Content -->
-                            <div class="nav-content d-flex align-items-center">
-                                <div class="classy-menu">
-
-                                    <!-- Close Button -->
-                                    <div class="classycloseIcon">
-                                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                                    </div>
-
-                                    <!-- Nav Start -->
-                                    <div class="classynav">
-                                        <ul>
-                                            <li class="active"><a href="/">Home</a></li>
-                                            <li ><a href="{{route('publish.index')}}">Articles</a></li>
-
-                                            <li><a href="{{route('archives.index')}}">Archive</a></li>
-
-                                            <li><a href="/about">About</a></li>
-                                            <li><a href="/contact">Contact</a></li>
-
-
-
-
-                                                @guest
-                                                    <a  href="{{ route('login') }}">Login</a>  |
-
-                                                    @if (Route::has('register'))
-                                                        <a  href="{{ route('register') }}">Register</a>
-                                                    @endif
-                                                @else
-                                                @if(Auth::user()->role_id==1)
-                                                        <li>
-                                                            <a href="#" id="showProfile">
-                                                                 <figure id="profileImage" class="col-2"></figure>
-                                                            </a>
-                                                        </li> |
-                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
-                                                @elseif(Auth::user()->role_id==2)
-                                                        <li>
-                                                            <a href="#" id="showProfile">
-                                                                <figure id="profileImage" class="col-2"></figure>
-                                                            </a>
-                                                        </li> |
-                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
-                                                @else
-                                                        <li><a href="#" id="showProfile">
-                                                            <figure id="profileImage" class="col-2"></figure>
-                                                            </a>
-                                                        </li>
-                                                        |
-                                                        <li><a href="{{route('logout')}}">Log Out</a></li>
-                                                @endif
-                                                @endguest
-
-                                        </ul>
-                                        @guest
-                                        @else
-                                            <div class="card" id="profile">
-                                                <div class="card-header row" id="showProfile">
-                                                    <figure id="profileImage"></figure>
-                                                    <div class="name col-8">
-                                                            <span id="firstName">{{Auth::user()->name}}</span>
-                                                            <small>{{Auth::user()->email}}</small>
-                                                    </div>
-
-                                                </div>
-                                                <hr>
-                                                <div class="card-body">
-                                                        @if(Auth::user()->role_id==1)
-                                                            <div>
-                                                                <a href="{{route('dash')}}">Admin Dasboard</a>
-                                                            </div>
-                                                        @elseif(Auth::user()->role_id==2)
-                                                        <div>
-                                                               <a href="#"> Editor Dasboard</a>
-                                                        </div>
-                                                        @endif
-
-                                                </div>
-                                            </div>
-                                        @endguest
-                                    </div>
-                                    <!-- Nav End -->
-                                </div>
-
-
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li class="active"><a href="/">Home</a></li>
+                                    <li><a href="/archives">Archive</a></li>
+                                    <li><a href="{{route('cat')}}">Categories</a></li>
+                                    
+                                    <li><a href="/about">About</a></li>
+                                    <li><a href="/contact">Contact</a></li>
+                                    @if(Auth::check())
+                                        @auth
+                                            @if(Auth::user()->role_id==1)
+                                                
+                                                <li>    <a href="#" id="showProfile">
+                                                        <figure id="profileImage" class="col-2"></figure>
+                                                    </a></li>
+                                                |
+                                                <li><a href="{{route('logout')}}">Log Out</a></li>
+                                            @elseif(Auth::user()->role_id==2)
+                                                
+                                                <li>    <a href="#" id="showProfile">
+                                                        <figure id="profileImage" class="col-2"></figure>
+                                                    </a></li>
+                                                |<li><a href="{{route('logout')}}">Log Out</a></li>
+                                            @endif
+                                            
+                                        @endauth
+                                    @else
+                                        <li> <a  href="{{ route('login') }}">Login</a>  </li>|
+                                        
+                                        @if (Route::has('register'))
+                                            <li>  <a  href="{{ route('register') }}">Register</a></li>
+                                        @endif
+                                    @endif
+                                  
+                                </ul>
                             </div>
+                            <!-- Nav End -->
+                        </div>
+                        
+                        <div class="top-meta-data d-flex align-items-center">
+                            <!-- Top Search Area -->
+                            <div class="top-search-area">
+                                <form action="{{route('search')}}" method="post">
+                                    @csrf
+                                    <input type="text" name="q" id="topSearch"
+                                        placeholder="Search and hit enter...">
+                                    <button type="submit" class="btn"><i class="fa fa-search"
+                                            aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        @if(Auth::check())
+        <div class="card" id="profile">
+            <div class="card-header row" id="showProfile">
+                <figure id="profileImage"></figure>
+                <div class="name col-6">
+                    <span id="firstName">{{Auth::user()->name}}</span>
+                    <small>{{Auth::user()->email}}</small>
+                </div>
+            </div>
+            <hr>
+            <div class="card-body">
+                @if(Auth::user()->role_id==1)
+                    <div>
+                        <a href="{{route('dash')}}">Admin Dasboard</a>
+                    </div>
+                @elseif(Auth::user()->role_id==2)
+                <div>
+                        <a href="#"> Editor Dasboard</a>
+                </div>
+                @endif
+            </div>
+        </div>
+        @endif
+    </header>
+        
+    <main>
+        @yield('content')
+    </main>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <!-- Logo -->
+                        <a href="index.html" class="foo-logo"><img src="" alt=""><h3 class="text-white">BIO Research</h3></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                        <div class="footer-social-info">
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                           
+                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <h6 class="widget-title">Categories</h6>
+                        <nav class="footer-widget-nav">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Biochemistry</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Education</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Computer Science</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Engineering</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Animal and Environmentals</a>
+                                </li>
+                              
+                            </ul>
                         </nav>
                     </div>
                 </div>
 
-    </header>
+               
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-        <footer class="footer-area">
-
-
-            <!-- Copywrite Area -->
-             <div class="copywrite-area">
-                <div class="container">
-                    <div class="row">
-                        <!-- Copywrite Text -->
-                        <div class="col-12 col-sm-6">
-                            <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy; All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <nav class="footer-nav">
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                    <li><a href="#">Advertisement</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <h6 class="widget-title">Channels</h6>
+                        <ul class="footer-tags">
+                            <li><a href="#">Education</a></li>
+                            <li><a href="#">Research</a></li>
+                            <li><a href="#">Skill</a></li>
+                            <li><a href="#">Project</a></li>
+                            <li><a href="#">NEWS</a></li>
+                            <li><a href="#">Discovery</a></li>
+                            <li><a href="#">Commenteries</a></li>
+                            <li><a href="#">More</a></li>
+                            
+                        </ul>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
 
+        <!-- Copywrite Area -->
+        <div class="copywrite-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Copywrite Text -->
+                    <div class="col-12 col-sm-6">
+                        <p class="copywrite-text">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright
+                            <script>document.write(new Date().getFullYear());</script> &copy; Bio Research Journal<i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <nav class="footer-nav">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/privacy">Privacy and policy</a></li>
+                                <li><a href="/advert">Advertisement</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
 
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- Popper js -->
     <script src="{{asset('js/bootstrap/popper.min.js')}}"></script>
-    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Bootstrap js -->
     <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
     <!-- All Plugins js -->
-
+    <script src="{{asset('js/plugins/plugins.js')}}"></script>
     <!-- Active js -->
     <script src="{{asset('js/active.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
     <script>
         $(document).click(function() {
             $("#showProfile").click(function() {
                 $("#profile").toggle();
             });
         });
-
         $(document).ready(function(){
             var firstName = $('#firstName').text();
-
             var intials = $('#firstName').text().charAt(0) + $('#firstName').text().charAt(1);
             var profileImage = $('#profileImage').text(intials);
         });
-
      </script>
-
 </body>
+
 </html>

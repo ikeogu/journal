@@ -55,8 +55,6 @@ class ArticleController extends Controller
         $this->validate(request(), [
             'title' => 'required','string',
             'author_name' => 'required','string',
-            'reference_code' => 'required','string',
-
             'email' => 'required','string',
             'agree'=>'required','boolean',
 
@@ -90,7 +88,6 @@ class ArticleController extends Controller
         $paper->phone= $request->Input('phone');
         $paper->phone= $request->Input('city');
         $paper->keywords = $request->Input('keywords');
-        $paper->category = $request->Input('category');
         $paper->abstract = $request->Input('abstract');
 
         $paper->author_name = $request->Input('author_name');
@@ -101,6 +98,7 @@ class ArticleController extends Controller
         $paper->know_us = $request->Input('know_us');
         $paper->agree = $request->Input('agree');
         $paper->user_id = Auth()->user()->id;
+        $paper->category_id = $request->cat_id;
         $user = User::find($paper->user_id);
 
         $user->articles()->save($paper);

@@ -32,7 +32,7 @@
                         <p>{{ \Session::get('success') }}</p>
                     </div><br />
             @endif
-            <div class="box-body">
+            <div class=" box-body py-5">
                     <form method="POST" action="{{route('archives.store')}}" enctype="multipart/form-data">
                         @csrf
         
@@ -62,6 +62,21 @@
                                 @enderror
                             
                         </div>
+                        <div class="form-group">
+                            <label class="col-form-label ">{{ __('Category') }}</label>
+                            <select class="form-control m-bot15" name="cat_id">
+
+                                    @if ($cat->count() > 0 )
+                                
+                                        @foreach($cat as $role)
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>    
+                                        @endforeach
+                                    @endif
+                                
+                                </select>
+                            
+                        </div>
+                        
                         <div class="form-group">
                             <label class="col-form-label ">{{ __('Description') }}</label>
         

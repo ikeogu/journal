@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Publish;
 use App\Archive;
+use App\Category;
 use Illuminate\Http\File;
 use PDF;
 use Illuminate\Http\Request;
@@ -29,8 +30,9 @@ class PublishController extends Controller
     public function create()
     {
         $archive = Archive::all();
+        $cat = Category::all();
 
-        return view('Publish/create',['archive'=>$archive]);
+        return view('Publish/create',['archive'=>$archive,'cat'=>$cat]);
     }
 
     /**
@@ -74,6 +76,7 @@ class PublishController extends Controller
     $publish->keywords =  $request->Input('keywords');
     $publish->no_pages =  $request->Input('no_pages');
     $publish->archive_id=  $request->Input('archive_id');
+    $publish->category_id = $request->cat_id;
 
     $archive = Archive::find($publish->archive_id);
 

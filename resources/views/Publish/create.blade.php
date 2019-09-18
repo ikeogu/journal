@@ -91,6 +91,20 @@
                             </select>
                         
                         </div>
+                        <div class="form-group has-success">  
+                                <label class="control-label" for="inputSuccess">Select {{ __('Category') }}</label>
+                                <select class="form-control m-bot15" name="cat_id">
+
+                                        @if ($cat->count() > 0 )
+                                    
+                                            @foreach($cat as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>    
+                                            @endforeach
+                                        @endif
+                                    
+                                    </select>
+                            
+                        </div>
                         <div class="form-group has-success">
                         <label class="control-label" for="inputSuccess">  No. Of Pages</label>
                         <input type="text" class="form-control @error('no_pages') is-invalid @enderror" name="no_pages" value="{{ old('no_pages') }}" required  id="inputSuccess" placeholder="Enter ...">

@@ -12,7 +12,7 @@ class Archive extends Model
      'title',];
 
      public function articles(){
-         return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class);
      }
 
      public function table_of_contents(){
@@ -21,5 +21,9 @@ class Archive extends Model
 
     public function archive_pub(){
         return $this->hasMany(Publish::class);
+    }
+
+    public function category(){
+        return $this->belongsTo('App\Category');
     }
 }

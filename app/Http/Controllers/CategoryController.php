@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Publish;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->except(['index2','pubs']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,12 +21,13 @@ class CategoryController extends Controller
        $cat = Category::all();
        return view('Admin/allcat',['cat'=>$cat]);
     }
-
-    public function cat(){
-        $cat = Category::all();
-        
-        return view('/pages/index')->with('cat',$cat);
+    public function index2()
+    {
+       $cat = Category::paginate(5);
+       return view('pages/categories',['cat'=>$cat]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -72,9 +77,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($category)
     {
-        //
+        $cat = Category::find($category);
+        return view('category/edit',['cat'=>$cat]);
     }
 
     /**
@@ -86,8 +92,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        Category::whereId($category->id)->update($request->except(['_method','_token']));
+        return redirect(route('category.index'))->with('success', ' Updated');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -95,8 +103,16 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($category)
     {
-        //
+        $cat = Category::find($category);
+        $cat->delete();
+        return redirect(route('category.index'))->with('success','Deleted');
+    }   
+    
+    // list of funtions for category views.
+    public function pubs($id){
+        $publish = Publish::where('category_id',$id)->paginate(5);
+        return view('pages/pub_art',['publish'=>$publish]);
     }
 }

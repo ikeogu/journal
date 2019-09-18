@@ -23,5 +23,7 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    public function artCat(){
+        return $this->belongsTo(Category::class);
+    }
 }

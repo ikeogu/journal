@@ -86,6 +86,12 @@
 
           </ul>
         </li>
+        <li>
+        <a href="{{route('category.create')}}">Create Category</a>
+        </li>
+        <li>
+            <a href="{{route('category.index')}}">All Categories</a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Editorial board</span>

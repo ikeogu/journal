@@ -61,15 +61,17 @@
                             </div>
                             
                             
-                        </div>
-                        <div>
-                            <button type="submit" class="btn mag-btn mt-30">Login</button>
-                            @if (Route::has('password.request'))
+                        
+                            <div>
+                            <button type="submit" class="btn mag-btn mt-30">Login</button><br>
+                                @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                            </div>        
+                                <a class="btn btn-link" href="/register">Create Account</a>  
+                            </div> 
+                                 
                         </form>
                     </div>
                 </div>

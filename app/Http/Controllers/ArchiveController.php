@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use App\Archive;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Category;
+use App\Table_Of_Content;
 class ArchiveController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','current_issue','prev_issue','show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,9 @@ class ArchiveController extends Controller
      */
     public function create()
     {
-        return view('archive/create');
+        $cat = Category::all();
+        $cont = Table_Of_Content::all();
+        return view('archive/create',['cat'=>$cat,'cont'=>$cont]);
     }
 
     /**
@@ -77,7 +85,10 @@ class ArchiveController extends Controller
         $archive->cover_page_back = $fileNameToSave;
         $archive->subtitle = $request->input('subtitle');
         $archive->description = $request->input('description');
-
+        $archive->table_of_content = "hello";
+        $archive->category_id = $request->cat_id;
+       
+        
         if($archive->save()){
             return redirect(route('archives.create'))->with('success', "Archive has been created");
         }
@@ -114,9 +125,10 @@ class ArchiveController extends Controller
      * @param  \App\Archive  $archive
      * @return \Illuminate\Http\Response
      */
-    public function edit(Archive $archive)
+    public function edit($archive)
     {
-        //
+       $arch = Archive::find($archive);
+       return view('archive/edit',['arch'=>$arch]);
     }
 
     /**
@@ -129,16 +141,21 @@ class ArchiveController extends Controller
     public function update(Request $request, Archive $archive)
     {
         //
+        Archive::whereId($archive->id)->update($request->except(['_method','_token']));
+        return redirect(route('archives'))->with('success', ' Updated');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Archive  $archive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Archive $archive)
+    public function destroy($id)
     {
         //
+        $del = Archive::find($id);
+        $del->delete();
+        return redirect(route('archives'))->with('success', ' Deleted');
     }
 }

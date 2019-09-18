@@ -16,18 +16,15 @@ use Illuminate\Support\Facades\Input;
 
 
 Route::get('/', function () {
-    $cat = Category::all();
-
-    return view('pages/index')->with('cat',$cat);
+   return view('pages/index');
 
 })->name('index');
+
 Route::get('/contact', function () {
     return view('pages/contact');
 });
 Route::get('/about','EditorCOntroller@editors');
-Route::get('/login', function () {
-    return view('pages/login');
-});
+
 Route::get('/author_s', function () {
     return view('pages/authors');
 });
@@ -49,7 +46,7 @@ Route::get('/read', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/papers','ArticleController');
+Route::resource('papers','ArticleController');
 Route::post('/papers','ArticleController@store')->name('pap');
 Route::post('/single-paper','CorrArticleController@single_article')->name('single');
 Route::get('/single_art','CorrArticleController@single')->name('sin');
@@ -57,10 +54,14 @@ Route::resource('archives', 'ArchiveController');
 Route::resource('publish', 'PublishController');
 Route::resource('editors','EditorController');
 Route::resource('category','CategoryController');
+Route::get('/categories','CategoryController@index2')->name('cat');
 Route::resource('fee','FeeController');
 Route::resource('corr_art', 'CorrArticleController');
+Route::resource('category', 'CategoryController');
 Route::get('/current_issue','ArchiveController@current_issue')->name('current');
 Route::get('/prev_issue','ArchiveController@prev_issue')->name('prev');
+//categories
+Route::get('/categorized/{key}','CategoryController@pubs');
 
 //logout
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
@@ -110,6 +111,19 @@ Route::any('/search',function(){
     return view ('search')->with('No Details found. Try to search again !');
     }
 })->name('search');
+//search for categories
+Route::any('/cats',function(){
+    $query = Input::get ( 'q' );
+    $cat = Category::where('name','like','%'.$query.'%')
+    ->orWhere('description','like','%'.$query.'%')
+   ->limit(8)
+    ->get();
+    if(count($cat) > 0){
+        return view('searchcat')->withDetails($cat)->withQuery($query);
+    }
+    return view ('searchcat')->with('No Details found. Try to search again !');
+
+})->name('searchcat');
 
 //contact us
 Route::get('/contact-us', 'ContactUSController@contactUS');

@@ -32,7 +32,7 @@
             <div class="related-post-area bg-white mb-30 px-30 pt-30 box-shadow">
                     <!-- Section Title -->
                     <div class="section-heading">
-                        <h5>>Published Articles</h5>
+                        <h5> Articles</h5>
                     </div>
 
                     <div class="row">
@@ -44,8 +44,8 @@
 
 
                                     <li class="list-group-item">
-                                        <h5> Title : <a href="/publish/{{$pap->id}}" style="color:blue;"> {{$pap->title}}</a> </h5></li>
-                                    <li class="list-group-item"> <h5> Author : <a href="/publish/{{$pap->id}}"> {{$pap->author_name}}</a> </h5></li>
+                                        <h6> Title : <a href="/publish/{{$pap->id}}" style="color:blue;"> {{$pap->title}}</a> </h6></li>
+                                    <li class="list-group-item"> <h6> Author : <a href="/publish/{{$pap->id}}"> {{$pap->author_name}}</a> </h6></li>
 
                                 </ul>
                             </div>
