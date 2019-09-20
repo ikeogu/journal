@@ -1,12 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/40.jpg);">
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/12.png);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <div class="breadcrumb-content">
-                        <h2>Contact Us</h2>
-                    </div>
+                   
                 </div>
             </div>
         </div>

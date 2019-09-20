@@ -132,4 +132,12 @@ Route::post('/contact_us', 'ContactUSController@contactUSPost')->name('contacts'
 // send mail
 Route::post('/sendmail', 'EmailController@send')->name('mailme');
 
+//newsLatterSubscribers
 
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/newslattersubscribers/export', 'NewsLatterSubscription@export')->name('export_subscriber');
+	Route::resource('/newslattersubscribers', 'NewsLatterSubscription');
+
+});
+
+Route::post('/newslattersubscribers', 'NewsLatterSubscription@store');

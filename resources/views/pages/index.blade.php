@@ -9,12 +9,11 @@
                 <div class="col-12">
                     <!-- Post Contetnt -->
                     <div class="post-content text-center">
-                        <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
-                            <a href="#">MAY 8, 2018</a>
-                            <a href="archive.html">lifestyle</a>
+                        <div class="post-meta">
+                            <a href="#">Do you Know?</a>
+                            <a href="#">Reading is a Lifestyle</a>
                         </div>
-                        <a href="video-post.html" class="post-title" data-animation="fadeInUp"
-                            data-delay="300ms">Party Jokes Startling But Unnecessary</a>
+                        <a href="#" class="post-title" >Readers are leaders</a>
                     </div>
                 </div>
             </div>
@@ -28,12 +27,27 @@
                 <div class="col-12">
                     <!-- Post Contetnt -->
                     <div class="post-content text-center">
-                        <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
-                            <a href="#">MAY 8, 2018</a>
-                            <a href="archive.html">lifestyle</a>
+                        <div class="post-meta" >
+                            <a href="#">Do you Know?</a>
+                            <a href="#">Reseachers knows the way</a>
                         </div>
-                        <a href="video-post.html" class="post-title" data-animation="fadeInUp"
-                            data-delay="300ms">Party Jokes Startling But Unnecessary</a>
+                        <a href="#" class="post-title" >Love the search of new knowledge</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(img/bg-img/3.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <!-- Post Contetnt -->
+                    <div class="post-content text-center">
+                        <div class="post-meta" >
+                            <a href="#">When you Search for</a>
+                            <a href="archive.html">You wil know the truth</a>
+                        </div>
+                        <a href="#" class="post-title" > Emulate studing</a>
                     </div>
                 </div>
             </div>
@@ -204,7 +218,44 @@
 
         <!-- Feature Video Posts Area -->
         <!--  -->
+        <div class="content">
 
+
+                <!-- Newslatter Subscription Modal -->
+                <div class="modal fade" id="newsLatterSubsModal" role="dialog" data-backdrop="false">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
+                          <h4 class="modal-title">Subscribe to get the exciting updates</h4>
+                          <span class="newslattersubswarrning"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    {{ csrf_field() }}
+                                  <input style="color: black;" type="email" id="subscribed_email" class="form-control" id="email" placeholder="Enter email">
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default email_subscribed" data-dismiss="modal">Subscribe</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">X</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                  <!-- Newslatter Subscription Modal -->
+
+              
+
+                
+
+            </div>
 
     </div>
 
@@ -222,8 +273,8 @@
             <div class="newsletter-form">
                 <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
                 <form action="#" method="get">
-                    <input type="search" name="widget-search" placeholder="Enter your email">
-                    <button type="submit" class="btn mag-btn w-100">Subscribe</button>
+                    <input type="search" name="widget-search" placeholder="Enter your email" id="subscribed_email">
+                    <button data-toggle="modal" data-target="#newsLatterSubsModal"class="btn mag-btn w-100">Subscribe</button>
                 </form>
             </div>
 
